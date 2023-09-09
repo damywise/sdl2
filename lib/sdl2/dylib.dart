@@ -16,6 +16,11 @@ DynamicLibrary dylibOpen(String mark) {
     case 'macos':
       header = 'lib';
       extension = '.dylib';
+
+      if (!File(header + mark + extension).existsSync()) {
+        header = '';
+        extension = '.framework/$mark';
+      }
       break;
     case 'windows':
       header = '';
